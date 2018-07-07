@@ -1,5 +1,5 @@
-const { buildSchema } = require('graphql');
 const express = require('express');
+const cors = require('cors');
 const graphqlHTTP = require('express-graphql');
 
 const mongoose = require('mongoose');
@@ -12,6 +12,7 @@ const PORT = 4000;
 
 const schema = require('./schema');
 
+server.use(cors());
 server.use(
   '/graphql',
   graphqlHTTP({
