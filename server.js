@@ -3,7 +3,11 @@ const cors = require('cors');
 const graphqlHTTP = require('express-graphql');
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/freelance-page');
+
+mongoose.connect(
+  'mongodb://localhost:27017/freelance-page',
+  { useNewUrlParser: true }
+);
 
 const db = mongoose.connection;
 
