@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 
 const blogPostSchema = mongoose.Schema({
   url: { type: String, required: true },
-  title: { type: String, required: true },
-  date: { type: Date, required: true },
-  post: { type: String, required: true },
+  title: { type: String },
+  date: { type: Date },
+  post: { type: String },
 });
 
 const projectSchema = mongoose.Schema({
-  url: { type: String, required: true },
-  title: { type: String, required: true },
-  shortDescription: { type: String, required: true },
+  url: { type: String },
+  title: { type: String },
+  shortDescription: { type: String },
   imageUrl: String,
   githubUrl: String,
 });
