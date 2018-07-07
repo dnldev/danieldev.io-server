@@ -37,8 +37,8 @@ const BlogPostInputType = new GraphQLInputObjectType({
   fields: () => ({
     url: { type: new GraphQLNonNull(GraphQLString) },
     title: { type: new GraphQLNonNull(GraphQLString) },
-    date: { type: new GraphQLNonNull(GraphQLDate) },
-    post: { type: new GraphQLNonNull(GraphQLString) },
+    date: { type: GraphQLDate },
+    post: { type: GraphQLString },
   }),
 });
 
@@ -47,7 +47,7 @@ const ProjectInputType = new GraphQLInputObjectType({
   fields: () => ({
     url: { type: new GraphQLNonNull(GraphQLString) },
     title: { type: new GraphQLNonNull(GraphQLString) },
-    shortDescription: { type: new GraphQLNonNull(GraphQLString) },
+    shortDescription: { type: GraphQLString },
     githubUrl: { type: GraphQLString },
     imageUrl: { type: GraphQLString },
   }),
