@@ -1,19 +1,55 @@
+const { GraphQLString } = require('graphql');
+
 const { BlogPostModel, ProjectModel } = require('../models');
 const {
   BlogPostType,
   BlogPostInputType,
+  BlogPostUpdateType,
   ProjectType,
   ProjectInputType,
+  ProjectUpdateType,
 } = require('./types');
 
-const addPost = {
+const addBlogPost = {
   type: BlogPostType,
   args: {
-    post: { type: BlogPostInputType },
+    blogPost: { type: BlogPostInputType },
   },
-  resolve(parentValue, { post }) {
+  resolve(parentValue, { blogPost }) {
     return new Promise((resolve, reject) =>
-      new BlogPostModel(post).save(
+      new BlogPostModel(blogPost).save(
+        (err, res) => (err ? reject(err) : resolve(res))
+      )
+    );
+  },
+};
+
+const deleteBlogPost = {
+  type: BlogPostType,
+  args: {
+    url: { type: GraphQLString },
+  },
+  resolve(parentValue, { url }) {
+    return new Promise((resolve, reject) =>
+      BlogPostModel.findOneAndRemove(
+        { url: url },
+        (err, res) => (err ? reject(err) : resolve(res))
+      )
+    );
+  },
+};
+
+const updateBlogPost = {
+  type: BlogPostType,
+  args: {
+    url: { type: GraphQLString },
+    updateValues: { type: BlogPostUpdateType },
+  },
+  resolve(parentValue, { url, updateValues }) {
+    return new Promise((resolve, reject) =>
+      BlogPostModel.findOneAndUpdate(
+        { url: url },
+        updateValues,
         (err, res) => (err ? reject(err) : resolve(res))
       )
     );
@@ -34,4 +70,43 @@ const addProject = {
   },
 };
 
-module.exports = { addPost, addProject };
+const deleteProject = {
+  type: ProjectType,
+  args: {
+    url: { type: GraphQLString },
+  },
+  resolve(parentValue, { url }) {
+    return new Promise((resolve, reject) =>
+      ProjectModel.findOneAndRemove(
+        { url: url },
+        (err, res) => (err ? reject(err) : resolve(res))
+      )
+    );
+  },
+};
+
+const updateProject = {
+  type: ProjectType,
+  args: {
+    url: { type: GraphQLString },
+    updateValues: { type: ProjectUpdateType },
+  },
+  resolve(parentValue, { url, updateValues }) {
+    return new Promise((resolve, reject) =>
+      ProjectModel.findOneAndUpdate(
+        { url: url },
+        updateValues,
+        (err, res) => (err ? reject(err) : resolve(res))
+      )
+    );
+  },
+};
+
+module.exports = {
+  addBlogPost,
+  deleteBlogPost,
+  updateBlogPost,
+  addProject,
+  deleteProject,
+  updateProject,
+};
