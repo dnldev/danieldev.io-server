@@ -10,7 +10,7 @@ const blogPost = {
   },
   resolve(parentValue, { url }) {
     return new Promise((resolve, reject) =>
-      BlogPostModel.find(
+      BlogPostModel.findOne(
         { url: url },
         (err, post) => (err ? reject(err) : resolve(post))
       )
@@ -37,7 +37,7 @@ const project = {
   },
   resolve(parentValue, { url }) {
     return new Promise((resolve, reject) =>
-      ProjectModel.find(
+      ProjectModel.findOne(
         { url: url },
         (err, project) => (err ? reject(err) : resolve(project))
       )
