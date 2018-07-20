@@ -19,7 +19,7 @@ const mutation = new GraphQLObjectType({
   },
 });
 
-module.exports = new GraphQLSchema({
-  query,
-  mutation,
-});
+module.exports = {
+  queries: new GraphQLSchema({ query }),
+  mutations: new GraphQLSchema({ query, mutation }),
+};
