@@ -1,6 +1,6 @@
 const { GraphQLString } = require('graphql');
 
-const { BlogPostModel, ProjectModel } = require('../models');
+const { BlogPostModel, ProjectModel } = require('./models');
 const {
   BlogPostType,
   BlogPostInputType,
